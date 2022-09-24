@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 export default function Principal() {
   let [profiles, setProfiles] = useState([]);
   let [gender, setGender] = useState([]);
+  let [selectedGender, setSelectedGender] = useState("");
   let [age, setAge] = useState([]);
   let [nat, setNat] = useState([]);
   let [fn, setFn] = useState([]);
@@ -104,7 +105,7 @@ export default function Principal() {
                   
                       <div className="form-outline">
                       <input type="text" id="form12" className="form-control border border-primary bg-light" />
-                      <label className="form-label" for="form12">
+                      <label className="form-label" htmlFor="form12">
                         Nombre <MDBIcon fas icon="search" />
                       </label>
                       
