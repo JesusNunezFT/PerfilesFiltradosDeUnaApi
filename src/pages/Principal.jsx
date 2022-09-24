@@ -20,6 +20,7 @@ export default function Principal() {
   let [nat, setNat] = useState([]);  
   let [selectedNat, setSelectedNat] = useState("");
   let [fn, setFn] = useState([]);
+  let [selectedFn, setSelectedFn] = useState("");
   let [fr, setFr] = useState([]);
 
   async function handleConsulta() {
@@ -127,7 +128,7 @@ export default function Principal() {
                 </td>
                 <td>
                   <label htmlFor="">F/Nacimiento</label>
-                  <select className="browser-default custom-select">
+                  <select onChange={ (e) => setSelectedFn(e.target.value) } className="browser-default custom-select">
                     <option value="">todos</option>
                     {fn.length &&
                       fn.map((g, index) => {
