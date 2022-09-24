@@ -17,29 +17,37 @@ export default function Principal() {
   let [selectedGender, setSelectedGender] = useState("");
   let [age, setAge] = useState([]);
   let [selectedAge, setSelectedAge] = useState("");
-  let [nat, setNat] = useState([]);  
+  let [nat, setNat] = useState([]);
   let [selectedNat, setSelectedNat] = useState("");
   let [fn, setFn] = useState([]);
   let [selectedFn, setSelectedFn] = useState("");
   let [fr, setFr] = useState([]);
   let [selectedFr, setSelectedFr] = useState("");
+  let [filterProfiles, setFilterProfile] = useState([]);
 
   async function handleConsulta() {
     let perfiles = await fetch("https://randomuser.me/api/?results=80")
       .then((response) => response.json())
-      
       .then((data) => data.results);
+
+    setFilterProfile(perfiles);
     setProfiles(perfiles);
-
     handleGender(perfiles);
-
     handleAge(perfiles);
-
     handleNat(perfiles);
-
     handleFn(perfiles);
-
     handleFr(perfiles);
+  }
+
+  function handleFiltro() {
+    let perfiles_filtrados = profiles;
+    if (selectedGender) {
+      perfiles_filtrados = profiles.filter(
+        (perfil) => perfil.gender == selectedGender
+      );
+    }
+
+    setFilterProfile(perfiles_filtrados);
   }
 
   function handleGender(perfiles) {
@@ -75,7 +83,6 @@ export default function Principal() {
     });
     nacimiento = nacimiento.sort();
     setFn(nacimiento);
-    
   }
 
   function handleFr(perfiles) {
@@ -85,7 +92,6 @@ export default function Principal() {
     });
     registro = registro.sort();
     setFr(registro);
-    
   }
 
   return (
@@ -94,7 +100,7 @@ export default function Principal() {
         <MDBCol size="md" className="text-center">
           <MDBTable className="text-center">
             <MDBTableHead className="bg-info shadow-1-strong ">
-              <tr >
+              <tr>
                 <th></th>
                 <th scope="col">
                   <MDBBtn onClick={handleConsulta}>Consultar</MDBBtn>
@@ -106,34 +112,49 @@ export default function Principal() {
             <MDBTableBody>
               <tr className="table-primary">
                 <th scope="row" className="d-flex justify-content-center">
-                  
-                      <div className="form-outline">
-                      <input type="text" id="form12" className="form-control border border-primary bg-light" />
-                      <label className="form-label" htmlFor="form12">
-                        Nombre <MDBIcon fas icon="search" />
-                      </label>
-                      
-                    </div>
-                  
+                  <div className="form-outline">
+                    <input
+                      type="text"
+                      id="form12"
+                      className="form-control border border-primary bg-light"
+                    />
+                    <label className="form-label" htmlFor="form12">
+                      Nombre <MDBIcon fas icon="search" />
+                    </label>
+                  </div>
                 </th>
 
                 <td>
                   <label htmlFor="">Edad </label>
-                  <select onChange={ (e) => setSelectedAge(e.target.value) } className="browser-default custom-select">
-                    <option value="" >todas</option>
+                  <select
+                    onChange={(e) => setSelectedAge(e.target.value)}
+                    className="browser-default custom-select"
+                  >
+                    <option value="">todas</option>
                     {age.length &&
                       age.map((g, index) => {
-                        return <option value={g} key={index}>{g}</option>;
+                        return (
+                          <option value={g} key={index}>
+                            {g}
+                          </option>
+                        );
                       })}
                   </select>
                 </td>
                 <td>
                   <label htmlFor="">F/Nacimiento</label>
-                  <select onChange={ (e) => setSelectedFn(e.target.value) } className="browser-default custom-select">
+                  <select
+                    onChange={(e) => setSelectedFn(e.target.value)}
+                    className="browser-default custom-select"
+                  >
                     <option value="">todos</option>
                     {fn.length &&
                       fn.map((g, index) => {
-                        return <option value={g} key={index}>{g}</option>;
+                        return (
+                          <option value={g} key={index}>
+                            {g}
+                          </option>
+                        );
                       })}
                   </select>
                 </td>
@@ -141,32 +162,52 @@ export default function Principal() {
               <tr className="table-primary">
                 <th scope="row">
                   <label htmlFor="">Genero</label>
-                  <select onChange={ (e) => setSelectedGender(e.target.value) } className="browser-default custom-select">
-                  
+                  <select
+                    onChange={(e) => setSelectedGender(e.target.value)}
+                    className="browser-default custom-select"
+                  >
                     <option value="">Todos</option>
                     {gender.length &&
                       gender.map((g, index) => {
-                        return <option value={g} key={index}>{g}</option>;
+                        return (
+                          <option value={g} key={index}>
+                            {g}
+                          </option>
+                        );
                       })}
                   </select>
                 </th>
                 <td>
                   <label htmlFor="">Nacionalidad</label>
-                  <select onChange={ (e) => setSelectedNat(e.target.value) } className="browser-default custom-select">
+                  <select
+                    onChange={(e) => setSelectedNat(e.target.value)}
+                    className="browser-default custom-select"
+                  >
                     <option value="">todos</option>
                     {nat.length &&
                       nat.map((g, index) => {
-                        return <option value={g} key={index}>{g}</option>;
+                        return (
+                          <option value={g} key={index}>
+                            {g}
+                          </option>
+                        );
                       })}
                   </select>
                 </td>
                 <td>
-                  <label  htmlFor="">F/Registro</label>
-                  <select onChange={ (e) => setSelectedFr(e.target.value) } className="browser-default custom-select">
+                  <label htmlFor="">F/Registro</label>
+                  <select
+                    onChange={(e) => setSelectedFr(e.target.value)}
+                    className="browser-default custom-select"
+                  >
                     <option value="">todos</option>
                     {fr.length &&
                       fr.map((g, index) => {
-                        return <option value={g} key={index}>{g}</option>;
+                        return (
+                          <option value={g} key={index}>
+                            {g}
+                          </option>
+                        );
                       })}
                   </select>
                 </td>
@@ -174,7 +215,7 @@ export default function Principal() {
               <tr>
                 <th></th>
                 <td scope="col">
-                  <MDBBtn>Filtrar Datos</MDBBtn>
+                  <MDBBtn onClick={handleFiltro}>Filtrar Datos</MDBBtn>
                 </td>
                 <td></td>
               </tr>
@@ -195,7 +236,7 @@ export default function Principal() {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {profiles.map((profile, index) => {
+          {filterProfiles.map((profile, index) => {
             return (
               <tr key={index}>
                 <td>{profile.name.first}</td>
