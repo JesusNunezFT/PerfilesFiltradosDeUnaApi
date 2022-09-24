@@ -27,29 +27,22 @@ export default function Principal() {
     setProfiles(perfiles);
 
     handleGender(perfiles);
-    console.log(gender);
 
     handleAge(perfiles);
-    console.log(age);
 
     handleNat(perfiles);
-    console.log(nat);
 
     handleFn(perfiles);
-    console.log(fn);
 
     handleFr(perfiles);
-    console.log(fr);
   }
 
   function handleGender(perfiles) {
-    console.log(perfiles);
     let generos_duplicados = perfiles.map((p) => p.gender);
     let generos = generos_duplicados.filter((item, index) => {
       return generos_duplicados.indexOf(item) === index;
     });
     setGender(generos);
-    console.log(generos);
   }
 
   function handleAge(perfiles) {
@@ -59,7 +52,6 @@ export default function Principal() {
     });
     edades = edades.sort();
     setAge(edades);
-    console.log(edades);
   }
 
   function handleNat(perfiles) {
@@ -69,7 +61,6 @@ export default function Principal() {
     });
     nacionalidad = nacionalidad.sort();
     setNat(nacionalidad);
-    console.log(nacionalidad);
   }
 
   function handleFn(perfiles) {
@@ -79,7 +70,7 @@ export default function Principal() {
     });
     nacimiento = nacimiento.sort();
     setFn(nacimiento);
-    console.log(nacimiento);
+    
   }
 
   function handleFr(perfiles) {
@@ -89,7 +80,7 @@ export default function Principal() {
     });
     registro = registro.sort();
     setFr(registro);
-    console.log(registro);
+    
   }
 
   return (
@@ -124,10 +115,10 @@ export default function Principal() {
                 <td>
                   <label htmlFor="">Edad</label>
                   <select className="browser-default custom-select">
-                    <option value="">todas</option>
+                    <option value="" >todas</option>
                     {age.length &&
                       age.map((g, index) => {
-                        return <option value={g}>{g}</option>;
+                        return <option value={g} key={index}>{g}</option>;
                       })}
                   </select>
                 </td>
@@ -136,8 +127,8 @@ export default function Principal() {
                   <select className="browser-default custom-select">
                     <option value="">todos</option>
                     {fn.length &&
-                      fn.map((g) => {
-                        return <option value={g}>{g}</option>;
+                      fn.map((g, index) => {
+                        return <option value={g} key={index}>{g}</option>;
                       })}
                   </select>
                 </td>
@@ -149,8 +140,8 @@ export default function Principal() {
                   
                     <option value="">Todos</option>
                     {gender.length &&
-                      gender.map((g) => {
-                        return <option value={g}>{g}</option>;
+                      gender.map((g, index) => {
+                        return <option value={g} key={index}>{g}</option>;
                       })}
                   </select>
                 </th>
@@ -160,7 +151,7 @@ export default function Principal() {
                     <option value="">todos</option>
                     {nat.length &&
                       nat.map((g, index) => {
-                        return <option value={g}>{g}</option>;
+                        return <option value={g} key={index}>{g}</option>;
                       })}
                   </select>
                 </td>
@@ -169,8 +160,8 @@ export default function Principal() {
                   <select className="browser-default custom-select">
                     <option value="">todos</option>
                     {fr.length &&
-                      fr.map((g) => {
-                        return <option value={g}>{g}</option>;
+                      fr.map((g, index) => {
+                        return <option value={g} key={index}>{g}</option>;
                       })}
                   </select>
                 </td>
