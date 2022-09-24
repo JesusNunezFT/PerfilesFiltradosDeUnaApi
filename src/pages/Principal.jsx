@@ -10,6 +10,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Principal() {
   let [profiles, setProfiles] = useState([]);
@@ -24,6 +25,8 @@ export default function Principal() {
   let [fr, setFr] = useState([]);
   let [selectedFr, setSelectedFr] = useState("");
   let [filterProfiles, setFilterProfile] = useState([]);
+
+  
 
   async function handleConsulta() {
     let perfiles = await fetch("https://randomuser.me/api/?results=80")
@@ -73,6 +76,7 @@ export default function Principal() {
 
     setFilterProfile(perfiles_filtrados);
   }
+
 
   function handleGender(perfiles) {
     let generos_duplicados = perfiles.map((p) => p.gender);
@@ -259,11 +263,17 @@ export default function Principal() {
             <th scope="col">FECHA DE REGISTRO</th>
           </tr>
         </MDBTableHead>
+
         <MDBTableBody>
           {filterProfiles.map((profile, index) => {
             return (
               <tr key={index}>
-                <td>{profile.name.first}</td>
+                <td>
+                  <Link to="/perfil" state= {profile}>
+                    <i className="fas fa-search"></i>
+                  </Link>
+                  {profile.name.first}
+                </td>
                 <td>{profile.dob.age}</td>
                 <td>{profile.gender}</td>
                 <td>{profile.nat}</td>

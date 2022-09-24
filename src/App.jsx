@@ -7,15 +7,17 @@ import Consulta from './pages/Consulta';
 
 export default function App() {
   return (
+    <div id='router'>
     <Router>
       <Routes>
       
         <Route path="/" element={<Principal />} />
-        <Route path="perfil" element={<Perfil />} />
+        <Route path="perfil" element={<Perfil />}/>
         <Route path="consulta" element={<Consulta />} />
       </Routes>
        
     </Router>
+    </div>
   )
 }
 

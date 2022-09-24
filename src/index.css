@@ -1,5 +1,12 @@
 DEX.CSS
+
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
 }
 
