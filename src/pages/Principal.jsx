@@ -42,8 +42,14 @@ export default function Principal() {
   function handleFiltro() {
     let perfiles_filtrados = profiles;
     if (selectedGender) {
-      perfiles_filtrados = profiles.filter(
+      perfiles_filtrados = perfiles_filtrados.filter(
         (perfil) => perfil.gender == selectedGender
+      );
+    }
+
+    if (selectedAge) {
+      perfiles_filtrados = perfiles_filtrados.filter(
+        (perfil) => perfil.dob.age == selectedAge
       );
     }
 
