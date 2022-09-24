@@ -101,15 +101,15 @@ export default function Principal() {
             <MDBTableBody>
               <tr className="table-primary">
                 <th scope="row" className="d-flex justify-content-center">
-                  <th>
-                    <div className="form-outline">
+                  
+                      <div className="form-outline">
                       <input type="text" id="form12" className="form-control border border-primary bg-light" />
                       <label className="form-label" for="form12">
                         Nombre <MDBIcon fas icon="search" />
                       </label>
                       
                     </div>
-                  </th>
+                  
                 </th>
 
                 <td>
