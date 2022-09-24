@@ -18,6 +18,7 @@ export default function Principal() {
   let [age, setAge] = useState([]);
   let [selectedAge, setSelectedAge] = useState("");
   let [nat, setNat] = useState([]);  
+  let [selectedNat, setSelectedNat] = useState("");
   let [fn, setFn] = useState([]);
   let [fr, setFr] = useState([]);
 
@@ -149,7 +150,7 @@ export default function Principal() {
                 </th>
                 <td>
                   <label htmlFor="">Nacionalidad</label>
-                  <select className="browser-default custom-select">
+                  <select onChange={ (e) => setSelectedNat(e.target.value) } className="browser-default custom-select">
                     <option value="">todos</option>
                     {nat.length &&
                       nat.map((g, index) => {
