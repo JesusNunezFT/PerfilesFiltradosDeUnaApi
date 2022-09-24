@@ -59,6 +59,18 @@ export default function Principal() {
       );
     }
 
+    if (selectedFn) {
+      perfiles_filtrados = perfiles_filtrados.filter(
+        (perfil) => perfil.dob.date == selectedFn
+      );
+    }
+
+    if (selectedFr) {
+      perfiles_filtrados = perfiles_filtrados.filter(
+        (perfil) => perfil.registered.date == selectedFr
+      );
+    }
+
     setFilterProfile(perfiles_filtrados);
   }
 
