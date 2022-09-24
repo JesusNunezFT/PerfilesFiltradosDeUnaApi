@@ -22,6 +22,7 @@ export default function Principal() {
   let [fn, setFn] = useState([]);
   let [selectedFn, setSelectedFn] = useState("");
   let [fr, setFr] = useState([]);
+  let [selectedFr, setSelectedFr] = useState("");
 
   async function handleConsulta() {
     let perfiles = await fetch("https://randomuser.me/api/?results=80")
@@ -160,8 +161,8 @@ export default function Principal() {
                   </select>
                 </td>
                 <td>
-                  <label htmlFor="">F/Registro</label>
-                  <select className="browser-default custom-select">
+                  <label  htmlFor="">F/Registro</label>
+                  <select onChange={ (e) => setSelectedFr(e.target.value) } className="browser-default custom-select">
                     <option value="">todos</option>
                     {fr.length &&
                       fr.map((g, index) => {
