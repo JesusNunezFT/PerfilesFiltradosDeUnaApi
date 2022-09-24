@@ -53,6 +53,12 @@ export default function Principal() {
       );
     }
 
+    if (selectedNat) {
+      perfiles_filtrados = perfiles_filtrados.filter(
+        (perfil) => perfil.nat == selectedNat
+      );
+    }
+
     setFilterProfile(perfiles_filtrados);
   }
 
