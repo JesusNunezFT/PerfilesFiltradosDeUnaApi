@@ -24,6 +24,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Perfil() {
@@ -91,12 +92,16 @@ export default function Perfil() {
     [ ]
   )
 
+
+
     return (
+      
     <MDBContainer
       breakpoint="md"
       className="d-flex justify-content-center align-items-center "
       style={{ width: 500, height: 800 }}
     >
+
       <MDBCard >
 
         <MDBCardImage
@@ -144,7 +149,16 @@ export default function Perfil() {
 
         </MDBListGroup>
         <button onClick={() => navigate(-1)} type="button" className="btn btn-primary">Regresar</button>
+        <button type="button" className="btn btn-warning"> 
+        
+        <Link to="/favoritos">
+        <i className="fas fa-search"></i>Ver Favoritos
+        </Link>
+      
+        </button>
 
+
+       
       </MDBCard>
     </MDBContainer>
   );
