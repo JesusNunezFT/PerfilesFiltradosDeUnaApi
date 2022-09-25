@@ -73,16 +73,18 @@ export default function Favoritos() {
             })}
         </MDBTableBody>
       </MDBTable>
-      <button
-        onClick={() => navigate(-1)}
-        type="button"
-        className="btn btn-primary"
-      >
-        Regresar
-      </button>
-      <button type="button" className="btn btn-warning">
-        Descargar
-      </button>
+      <div>
+        <button
+          onClick={() => navigate(-1)}
+          type="button"
+          className="btn btn-primary"
+        >
+          Regresar
+        </button>
+        <button type="button" className="btn btn-warning">
+          <a href="https://randomuser.me/api/?format=csv">Descargar</a>
+        </button>
+      </div>
     </MDBContainer>
   );
 }
