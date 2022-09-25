@@ -24,12 +24,11 @@ import { useLocation } from "react-router-dom";
 
 
 
-export default function Perfil(props) {
+export default function Perfil() {
 
-  console.log(props)
   const location = useLocation()
   const profile = location.state
-  console.log(location)
+  
 
   return (
     <MDBContainer
@@ -43,12 +42,12 @@ export default function Perfil(props) {
           className="shadow-2-strong"
           position="center"
           alt="..."
-          src="https://mdbootstrap.com/img/new/standard/city/062.webp"
+          src={profile.picture.large}
         ></MDBCardImage>
 
         <MDBCardBody >
           <MDBCardTitle>
-            <strong>Nombre:</strong><p>Jesus Nuñez</p>
+            <strong>Nombre:</strong><p>{ `${profile.name.first} ${profile.name.last}` }</p>
           </MDBCardTitle>
           <MDBCardText> <MDBIcon far icon="star" className="text-warning"/>
           </MDBCardText>
@@ -58,37 +57,32 @@ export default function Perfil(props) {
 
           <MDBListGroupItem>
             <strong> Genero: </strong>
-            <p> Male </p>
+            <p> {profile.gender}</p>
           </MDBListGroupItem>
 
           <MDBListGroupItem>
             <strong>Email:</strong>
-            <p>@gmail.com</p>
+            <p>{profile.email}</p>
           </MDBListGroupItem>
 
           <MDBListGroupItem>
             <strong>Nacionalidad:</strong>
-            <p>Ar</p>
+            <p>{profile.nat}</p>
           </MDBListGroupItem>
 
           <MDBListGroupItem>
             <strong>Fecha de Nacimiento</strong>
-            <p>1980</p>
+            <p>{profile.dob.date}</p>
           </MDBListGroupItem>
 
           <MDBListGroupItem>
             <strong>Fecha de Registro</strong>
-            <p>1990</p>
+            <p>{profile.registered.date}</p>
           </MDBListGroupItem>
 
         </MDBListGroup>
 
-        <MDBCardBody>
-          <MDBCardLink>Delete</MDBCardLink>
-          <MDBCardLink href="#">
-            <MDBIcon fas icon="trash" />
-          </MDBCardLink>
-        </MDBCardBody>
+        
 
       </MDBCard>
     </MDBContainer>
