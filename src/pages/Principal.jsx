@@ -26,12 +26,26 @@ export default function Principal() {
   let [selectedFr, setSelectedFr] = useState("");
   let [filterProfiles, setFilterProfile] = useState([]);
 
-  
+  useEffect(() => {
+    let perfiles = localStorage.getItem("profiles");
+    if (perfiles) {
+      setProfiles(perfiles);
+    }
+  }, []);
 
   async function handleConsulta() {
-    let perfiles = await fetch("https://randomuser.me/api/?results=80")
-      .then((response) => response.json())
-      .then((data) => data.results);
+    let areProfilesInLocalStore = localStorage.getItem("profiles");
+    let perfiles = [];
+
+    if (areProfilesInLocalStore) {
+      perfiles = JSON.parse(localStorage.getItem("profiles"));
+    } else {
+      perfiles = await fetch("https://randomuser.me/api/?results=80")
+        .then((response) => response.json())
+        .then((data) => data.results);
+
+      localStorage.setItem("profiles", JSON.stringify(perfiles));
+    }
 
     setFilterProfile(perfiles);
     setProfiles(perfiles);
@@ -76,7 +90,6 @@ export default function Principal() {
 
     setFilterProfile(perfiles_filtrados);
   }
-
 
   function handleGender(perfiles) {
     let generos_duplicados = perfiles.map((p) => p.gender);
@@ -269,7 +282,7 @@ export default function Principal() {
             return (
               <tr key={index}>
                 <td>
-                  <Link to="/perfil" state= {profile}>
+                  <Link to="/perfil" state={profile}>
                     <i className="fas fa-search"></i>
                   </Link>
                   {profile.name.first}

@@ -21,16 +21,77 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { useLocation } from "react-router-dom";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 export default function Perfil() {
 
   const location = useLocation()
   const profile = location.state
+  const navigate = useNavigate()
   
+  
+  const [yellowStar, setYellowStar] = useState(false)
 
-  return (
+
+  function handleFav() {
+    let nombreDePerfil = JSON.stringify(profile)
+    let perfilDeLocalStore = JSON.parse(localStorage.getItem(nombreDePerfil))
+    let isProfileFavorite = perfilDeLocalStore.estrella
+    if (perfilDeLocalStore.estrella === true) {
+    // estrella en amarillo
+      setYellowStar(false)
+
+      let objeto = {
+        perfil: profile, 
+        estrella: false
+       }
+      // guardarlo en localStore
+      localStorage.setItem(nombreDePerfil, JSON.stringify(objeto))
+    } else {
+      setYellowStar(true)
+
+      let objeto = {
+        perfil: profile, 
+        estrella: true
+       }
+      // guardarlo en localStore
+      localStorage.setItem(nombreDePerfil, JSON.stringify(objeto))
+    }
+  }
+
+  useEffect(
+    () => {
+      
+      let nombreDePerfil = JSON.stringify(profile)
+      let isProfileInLocalStore = localStorage.getItem(nombreDePerfil)
+      if (isProfileInLocalStore) {
+      // revisar si el perfil es favorito o no
+      let perfilDeLocalStore = JSON.parse(localStorage.getItem(nombreDePerfil))
+      let isProfileFavorite = perfilDeLocalStore.estrella
+      if (isProfileFavorite) {
+      // estrella en amarillo
+        setYellowStar(true)
+      }
+
+
+        // console.log("existe el perfil")
+      } else {
+        let objeto = {
+          perfil: profile, 
+          estrella: false
+         }
+        // guardarlo en localStore
+        localStorage.setItem(nombreDePerfil, JSON.stringify(objeto))
+        // console.log("no existe el perfil en LS")
+      }
+    }, 
+    [ ]
+  )
+
+    return (
     <MDBContainer
       breakpoint="md"
       className="d-flex justify-content-center align-items-center "
@@ -49,7 +110,8 @@ export default function Perfil() {
           <MDBCardTitle>
             <strong>Nombre:</strong><p>{ `${profile.name.first} ${profile.name.last}` }</p>
           </MDBCardTitle>
-          <MDBCardText> <MDBIcon far icon="star" className="text-warning"/>
+          <MDBCardText> <MDBIcon onClick={handleFav} far icon="star" className={yellowStar ? "text-warning" : ""}/>
+          
           </MDBCardText>
         </MDBCardBody>
 
@@ -81,8 +143,7 @@ export default function Perfil() {
           </MDBListGroupItem>
 
         </MDBListGroup>
-
-        
+        <button onClick={() => navigate(-1)} type="button" className="btn btn-primary">Regresar</button>
 
       </MDBCard>
     </MDBContainer>
