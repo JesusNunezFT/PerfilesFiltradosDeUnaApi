@@ -24,6 +24,7 @@ export default function Principal() {
   let [selectedFn, setSelectedFn] = useState("");
   let [fr, setFr] = useState([]);
   let [selectedFr, setSelectedFr] = useState("");
+  let [name, setName] = useState("");
   let [filterProfiles, setFilterProfile] = useState([]);
 
   useEffect(() => {
@@ -54,10 +55,20 @@ export default function Principal() {
     handleNat(perfiles);
     handleFn(perfiles);
     handleFr(perfiles);
+    
   }
+
+
 
   function handleFiltro() {
     let perfiles_filtrados = profiles;
+
+    if (name) {
+      perfiles_filtrados = perfiles_filtrados.filter(
+        (perfil) => perfil.name.first.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+
     if (selectedGender) {
       perfiles_filtrados = perfiles_filtrados.filter(
         (perfil) => perfil.gender == selectedGender
@@ -155,6 +166,9 @@ export default function Principal() {
                 <th scope="row" className="d-flex justify-content-center">
                   <div className="form-outline">
                     <input
+                      onChange={(e) => 
+                       setName(e.target.value) 
+                      }
                       type="text"
                       id="form12"
                       className="form-control border border-primary bg-light"
@@ -162,6 +176,7 @@ export default function Principal() {
                     <label className="form-label" htmlFor="form12">
                       Nombre <MDBIcon fas icon="search" />
                     </label>
+                    
                   </div>
                 </th>
 
